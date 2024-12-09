@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 
 # Your BLS API key
-API_KEY = "65afab4a256742f183969f74be49fecc."
+API_KEY = "65afab4a256742f183969f74be49fecc"
 
 # Series to fetch
 SERIES_IDS = {
