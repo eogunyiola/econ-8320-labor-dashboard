@@ -14,5 +14,5 @@ if st.checkbox("Show raw data"):
 # Create a chart
 chart = st.line_chart(data.pivot(index="date", columns="series", values="value"))
 
-!pip install pyngrok streamlit
+
 
