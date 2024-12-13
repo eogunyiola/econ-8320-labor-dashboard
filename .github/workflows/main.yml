@@ -1,0 +1,33 @@
+name: Update Labor Data
+
+on:
+  schedule:
+    - cron: "0 0 1 * *" # Runs on the 1st of every month
+  workflow_dispatch: # Allows manual triggering of the action
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.8"
+
+    - name: Install dependencies
+      run: pip install pandas requests
+
+    - name: Run data collection script
+      run: python collect_data.py
+
+    - name: Commit and push updated data
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add labor_statistics.csv || echo "No changes to add"
+        git diff-index --quiet HEAD || git commit -m "Update labor statistics data"
+        git push || echo "No changes to push"
